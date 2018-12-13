@@ -1,6 +1,25 @@
-# from rest_framework import serializers
-# from rest_framework.serializers import ModelSerializer
-# from banco.models import Client, Account, AccountType
+from rest_framework import serializers
+from rest_framework.serializers import ModelSerializer
+from sula.models import Cliente,Productor,Factura,NotaEntrega,TotalLeche
+
+class ClienteSerializer(ModelSerializer):
+  class Meta:
+    model = Cliente
+    fields = ['id', 'nombre', 'apellido']
+
+class ProductorSerializer(ModelSerializer):
+  class Meta:
+    model = Productor
+    fields = ['id', 'nombre', 'apellido']
+
+class NotaEntregaSerializer(ModelSerializer):
+#   account_type = serializers.SlugRelatedField(read_only=True, slug_field='description')
+
+  class Meta:
+    model = NotaEntrega
+    fields = ['id', 'productor', 'cantidad', 'precio', 'total']
+
+
 
 # class AccountTypeSerializer(ModelSerializer):
 #   class Meta:

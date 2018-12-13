@@ -1,20 +1,28 @@
-# from banco.models import Client, Account, AccountType
-# from .serializers import (
-#   ClientSerializer,
-#   ClientAddSerializer,
-#   AccountXSerializer,
-#   AccountTypeXSerializer,
-#   AccountSerializer
-# )
-# from rest_framework.generics import (
-#   ListAPIView,
-#   CreateAPIView,
-#   DestroyAPIView,
-#   UpdateAPIView,
-#   ListCreateAPIView,
-#   RetrieveAPIView,
-# )
-# from rest_framework import status, permissions
+from sula.models import Cliente,Productor,NotaEntrega
+from rest_framework.generics import (
+  ListAPIView,
+  CreateAPIView,
+  DestroyAPIView,
+  UpdateAPIView,
+  ListCreateAPIView,
+  RetrieveAPIView,
+)
+
+from .serializers import (
+  ClienteSerializer,
+  ProductorSerializer,
+  NotaEntregaSerializer
+)
+
+from rest_framework import status, permissions
+
+class ClienteListAPIView(ListCreateAPIView):
+  queryset = Cliente.objects.all()
+  serializer_class = ClienteSerializer
+
+class ProductorListAPIView(ListCreateAPIView):
+    queryset = Productor.objects.all()
+    serializer_class = ProductorSerializer
 # from rest_framework import mixins, generics
 # from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 

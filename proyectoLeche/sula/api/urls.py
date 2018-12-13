@@ -1,4 +1,8 @@
 from django.conf.urls import url
+from .views import (
+  ClienteListAPIView,
+  ProductorListAPIView
+)
 # from .views import (
 #   ClientListAPIView,
 #   ClientAddAPIView,
@@ -13,7 +17,12 @@ from django.conf.urls import url
 # )
 
 urlpatterns = [
-  # url(r'^clients/$', ClientListAPIView.as_view(), name='clients'),
+  #-------------- Cliente
+  url(r'^clientes/$', ClienteListAPIView.as_view(), name='lista-clientes'),
+  #-------------- Productor
+  url(r'^productores/$', ProductorListAPIView.as_view(), name='lista-productores'),
+
+  
   # url(r'^client/add/$', ClientAddAPIView.as_view(), name='add-client'),
   # url(r'^client/(?P<pk>\d+)/remove/$', ClientDeleteAPIView.as_view(), name='del-client'),
   # url(r'^client/(?P<pk>\d+)/edit/$', ClientUpdateAPIView.as_view(), name='edit-client'),
