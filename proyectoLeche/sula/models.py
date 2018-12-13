@@ -15,19 +15,49 @@ class Cliente(models.Model):
   nombre = models.CharField(max_length=25)
   apellido = models.CharField(max_length=25)
   sexo = models.ForeignKey(Sexo)
-  es_productor = models.BooleanField(default=True)
+#   es_productor = models.BooleanField(default=True)
+
+  def __str__(self):
+    return '{} {}'.format(self.nombre, self.apellido)
+
+
+class Productor(models.Model):
+  nombre = models.CharField(max_length=25)
+  apellido = models.CharField(max_length=25)
+  sexo = models.ForeignKey(Sexo)
 
   def __str__(self):
     return '{} {}'.format(self.nombre, self.apellido)
 
 
 class NotaEntrega(models.Model):
-    cliente = models.ForeignKey(Cliente, related_name='notaEntregas', on_delete=models.CASCADE)
-    precio = models.DecimalField(max_digits=10, decimal_places=2)
-    cantidad = models.IntegerField()
-
-    def __str__(self):
-    return '{}'.format(self.cliente)
-
-    def total(self):
+    productor = models.ForeignKey(Productor, related_name='notaEntregas', on_delete=models.CASCADE)
+    cantidad = models.DecimalField(max_digits=10, decimal_places=1)
+    precio = models.DecimalField(max_digits=10, decimal_places=1)
+    
+    def getTotal(self):
         return self.precio * self.cantidad
+    total = property(getTotal)
+    def __str__(self):
+        return '{} > {}'.format(self.productor,self.total)
+
+class Factura(models.Model):
+    cliente = models.ForeignKey(Cliente, related_name='facturas', on_delete=models.CASCADE)
+    cantidad = models.DecimalField(max_digits=10, decimal_places=1)
+    precio = models.DecimalField(max_digits=10, decimal_places=1)
+    
+    def getTotal(self):
+        return self.precio * self.cantidad
+    total = property(getTotal)
+    def __str__(self):
+        return '{} > {}'.format(self.cliente,self.total)
+
+# class Factura(models.Model):
+        
+
+class TotalLeche(models.Model):
+    totalLeche = models.DecimalField( max_digits=5, decimal_places=1)
+    def __str__(self):
+        return '{}'.format(self.totalLeche)
+
+
