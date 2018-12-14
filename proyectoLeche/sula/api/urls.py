@@ -1,7 +1,12 @@
 from django.conf.urls import url
 from .views import (
   ClienteListAPIView,
-  ProductorListAPIView
+  ProductorListAPIView,
+  FacturaListAPIView,
+  FacturaDeleteAPIView,
+  TotalLecheRetrieveUpdateAPIView,
+  ClienteRetrieveUpdateDestroyAPIView,
+  ClienteFacturasListAPIView
 )
 # from .views import (
 #   ClientListAPIView,
@@ -17,11 +22,19 @@ from .views import (
 # )
 
 urlpatterns = [
+
+   url(r'^total-leche/(?P<pk>\d+)/$', TotalLecheRetrieveUpdateAPIView.as_view(), name='client-details'),
   #-------------- Cliente
   url(r'^clientes/$', ClienteListAPIView.as_view(), name='lista-clientes'),
+  url(r'^cliente/(?P<pk>\d+)/$', ClienteRetrieveUpdateDestroyAPIView.as_view(), name='cliente-detalle'),
+  url(r'^cliente/(?P<id>\d+)/facturas/$', ClienteFacturasListAPIView.as_view(), name='client-accounts'),
+
   #-------------- Productor
   url(r'^productores/$', ProductorListAPIView.as_view(), name='lista-productores'),
 
+  #-------------- Factura
+  url(r'^facturas/$', FacturaListAPIView.as_view(), name='lista-facturas'),
+  url(r'^factura/(?P<pk>\d+)/eliminar/$', FacturaDeleteAPIView.as_view(), name='eliminar-factura'),
   
   # url(r'^client/add/$', ClientAddAPIView.as_view(), name='add-client'),
   # url(r'^client/(?P<pk>\d+)/remove/$', ClientDeleteAPIView.as_view(), name='del-client'),

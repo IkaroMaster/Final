@@ -1,0 +1,63 @@
+
+<div class="row" *ngIf="cliente">
+  
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <h1>{{cliente.nombre}} {{cliente.apellido}}</h1>
+  </div>
+    
+  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    <br>
+      ID: <br>
+      <input class="form-control" type="number" [(ngModel)]="cliente.id" readonly>
+  
+      <br>
+  
+      Nombre: <br>
+      <input class="form-control" type="text" [(ngModel)]="cliente.nombre">
+  
+      <br>
+  
+      Apellido: <br>
+      <input class="form-control" type="text" [(ngModel)]="cliente.apellido">
+  
+      <br>
+      <button class="btn btn-info " (click)="actualizarCliente();" >actualizar</button>|
+      <button class="btn btn-danger " (click)="volver()" >Cancelar</button>
+      
+  </div>
+  
+  <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    
+      <h2>Listado de facturas de {{cliente.nombre}} </h2>
+      <hr>
+      
+      
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre del Cliente</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Total</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let f of facturas">
+            
+            <td>{{f.id}}</td>
+  
+            <td>{{f.clienteInfo.nombre}} {{f.clienteInfo.apellido}}</td>
+            <td>{{f.cantidad}} </td>
+            <td>{{f.precio}} </td>
+            <td>{{f.total}} </td> 
+            
+          </tr>
+        </tbody>
+      </table>
+    
+  </div>
+  
+  
+</div>

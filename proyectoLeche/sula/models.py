@@ -32,7 +32,7 @@ class Productor(models.Model):
 class TotalLeche(models.Model):
     totalLeche = models.DecimalField( max_digits=5, decimal_places=1)
     def __str__(self):
-        return '{}'.format(self.totalLeche)
+        return '{}>{}'.format(self.id,self.totalLeche)
 
 
 

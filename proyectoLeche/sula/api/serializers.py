@@ -12,6 +12,13 @@ class ProductorSerializer(ModelSerializer):
     model = Productor
     fields = ['id', 'nombre', 'apellido']
 
+class FacturaSerializer(ModelSerializer):
+    clienteInfo = ClienteSerializer(many=False,read_only= True,source='cliente')
+    # accounts = AccountSerializer(many = True, read_only = True)
+    class Meta:
+        model = Factura
+        fields = ['id', 'cliente', 'cantidad', 'precio', 'total','clienteInfo']
+
 class NotaEntregaSerializer(ModelSerializer):
 #   account_type = serializers.SlugRelatedField(read_only=True, slug_field='description')
 
@@ -19,6 +26,10 @@ class NotaEntregaSerializer(ModelSerializer):
     model = NotaEntrega
     fields = ['id', 'productor', 'cantidad', 'precio', 'total']
 
+class TotalLecheSerializer(ModelSerializer):
+    class Meta:
+        model = TotalLeche
+        fields = ['id','totalLeche']
 
 
 # class AccountTypeSerializer(ModelSerializer):
