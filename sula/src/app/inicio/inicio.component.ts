@@ -22,19 +22,23 @@ export class InicioComponent implements OnInit {
   factura: Factura;
   totalLeche: TotalLeche; 
   totalL:number = 0;
+  cliente: Cliente;
 
   ngOnInit() {
-
+    this.obtenerTotalLeche();
     this.obtenerFacturas();
     this.obtenerClientes();
-    this.obtenerTotalLeche();
     this.ts.setTitle('Factura');
     
     
   }
   obtenerTotalLeche()
   {
-    this.ds.obtenerTotalLeche().subscribe(i=>this.totalLeche = i);
+    this.ds.obtenerTotalLeche().subscribe(i=>{
+      this.totalLeche = i;
+      this.totalL = +this.totalLeche.totalLeche;
+      console.log(this.totalLeche);
+    });
   }
  
 
@@ -43,9 +47,9 @@ export class InicioComponent implements OnInit {
   {
     this.ds.obtenerFacturas().subscribe(i =>{
       this.facturas = i;
-      i.forEach(item => {
-        this.totalL += +item.cantidad;
-      });
+      // i.forEach(item => {
+      //   this.totalL += +item.cantidad;
+      // });
     });
   }
   public guardarFactura(cliente:number,cantidad:number,precio:number)
@@ -53,16 +57,23 @@ export class InicioComponent implements OnInit {
     
 
     if (!cliente || !cantidad || !precio) return;
-    this.factura = new Factura(0,cliente,cantidad,precio);
-    this.ds.guardarFactura(this.factura).subscribe(i => {
-    this.facturas.push(i)
+    if (cantidad > this.totalL)
+    {
+      let i = cantidad - this.totalL; 
+      return alert(`Faltan ${i} Litros de leche para poder realizar la venta`);
+    }else{
+      this.factura = new Factura(0,cliente,cantidad,precio);
+      this.ds.guardarFactura(this.factura).subscribe(i => {
+        this.facturas.push(i)
 
-      this.totalLeche.id = 2;
-      this.totalLeche.totalLeche = +this.totalL+(+i.cantidad);
-      this.ds.guardarTotalLeche(this.totalLeche).subscribe();
-      this.totalL = this.totalLeche.totalLeche;
+        this.totalLeche.id = 2;
+        this.totalLeche.totalLeche = +this.totalL-(+i.cantidad);
+        this.ds.guardarTotalLeche(this.totalLeche).subscribe();
+        this.totalL = this.totalLeche.totalLeche;
 
-    });
+      });
+    }
+    
     // this.obtenerTotalLeche();
     
 
@@ -73,7 +84,7 @@ export class InicioComponent implements OnInit {
 
     this.ds.eliminarFactura(f).subscribe();
     this.facturas = this.facturas.filter(h =>h !== f);
-    this.totalL -= +f.cantidad;
+    this.totalL += +f.cantidad;
     this.actualizarTotalLeche(this.totalL);
 
   }
@@ -90,5 +101,22 @@ export class InicioComponent implements OnInit {
   obtenerClientes()
   {
     this.ds.obtenerClientes().subscribe(i =>this.clientes = i);
+  }
+  guardarCliente(nombre: string, apellido: string)
+  {
+    nombre = nombre.trim();
+    apellido = apellido.trim();
+    
+
+    if (!nombre || !apellido) return;
+
+    
+    this.cliente = new Cliente(0, nombre, apellido);
+
+    this.ds.guardarCliente(this.cliente).subscribe(c => {
+      this.clientes.push(c)
+      console.log(this.clientes);
+    });
+    
   }
 }

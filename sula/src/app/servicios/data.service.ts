@@ -70,6 +70,11 @@ export class DataService {
     return this.http.get<Cliente>(`${this.url}/cliente/${id}`);
   }
 
+  guardarCliente(c: Cliente): Observable<Cliente>
+  {
+    return this.http.post<Cliente>(`${this.url}/clientes/`, c, httpOptions);
+  }
+
   actualizarCliente(cli: Cliente): Observable<Cliente>
   {
     return this.http.put<Cliente>(`${this.url}/cliente/${cli.id}/`, cli, httpOptions);

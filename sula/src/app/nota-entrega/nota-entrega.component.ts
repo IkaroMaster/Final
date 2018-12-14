@@ -28,7 +28,10 @@ export class NotaEntregaComponent implements OnInit {
   }
     obtenerTotalLeche()
   {
-    this.ds.obtenerTotalLeche().subscribe(i=>this.totalLeche = i);
+    this.ds.obtenerTotalLeche().subscribe(i=>{
+      this.totalLeche = i;
+      this.totalL = +this.totalLeche.totalLeche;
+    });
   }
  
 
@@ -37,13 +40,14 @@ export class NotaEntregaComponent implements OnInit {
   {
     this.ds.obtenerNotaEntrega().subscribe(i =>{
       this.NotaEntregas = i;
-      i.forEach(item => {
-        this.totalL += +item.cantidad;
-      });
+      // i.forEach(item => {
+      //   this.totalL += +item.cantidad;
+      // });
     });
   }
   public guardarNotaEntrega(productor:number,cantidad:number,precio:number)
   {
+    alert(`${productor} ${cantidad} ${precio}`);
     if (!productor || !cantidad || !precio) return;
     this.NotaEntrega = new NotaEntrega(0,productor,cantidad,precio);
     this.ds.guardarNotaEntrega(this.NotaEntrega).subscribe(i => {
@@ -60,13 +64,20 @@ export class NotaEntregaComponent implements OnInit {
   }
   eliminarNotaEntrega(f: NotaEntrega)
   {
-    if (!confirm(`Confirma eliminar la NotaEntrega #-${f.id}`)) return false;
+    
+    if(f.cantidad > this.totalL){
+      let i = f.cantidad - this.totalL;
+      alert(`imposible anular la nota de entrega #${f.id}. Faltan ${i} litros de leche para hacer la devolucion`);
+      
+    }else{
+      if (!confirm(`Confirma eliminar la NotaEntrega #-${f.id}`)) return false;
+      this.ds.eliminarNotaEntrega(f).subscribe();
+      this.NotaEntregas = this.NotaEntregas.filter(h =>h !== f);
+      this.totalL -= +f.cantidad;
+      this.actualizarTotalLeche(this.totalL);
 
-    this.ds.eliminarNotaEntrega(f).subscribe();
-    this.NotaEntregas = this.NotaEntregas.filter(h =>h !== f);
-    this.totalL -= +f.cantidad;
-    this.actualizarTotalLeche(this.totalL);
-
+    }
+    
   }
 
   actualizarTotalLeche(tl: number)

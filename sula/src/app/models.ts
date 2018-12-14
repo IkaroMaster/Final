@@ -26,7 +26,7 @@ export class Productor {
 export class NotaEntrega {
     constructor(
         public id: number,
-        public cliente: number,
+        public productor: number,
         public cantidad: number,
         public precio: number,
         // public total: number

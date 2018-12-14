@@ -3,13 +3,30 @@
     <h2>Nueva Factura</h2>
     <hr>
       Cliente: <br>
-      <select class="form-control" #cl>
-        <option value="">Seleccione</option>
-        <option *ngFor="let c of clientes" value="{{ c.id }}">
-          {{ c.nombre }} {{c.apellido}}
-        </option>
-      </select>
-      <br>
+      
+      <div class="row">
+        
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+          <select class="form-control" #cl>
+            <option value="">Seleccione</option>
+            <option *ngFor="let c of clientes" value="{{ c.id }}">
+              {{ c.nombre }} {{c.apellido}}
+            </option>
+          </select>
+          <br>
+        </div>
+        
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#miModal">
+                +
+              </button>
+
+        </div>
+        
+        
+      </div>
+      
+      
       Cantidad:
       <input type="number" class="form-control" #c >
       <br>
@@ -21,8 +38,8 @@
         
     
   </div>
-  Total Leche:
-  <h3 *ngIf="totalL">
+  Total litros de Leche en Existencia:
+  <h3>
     {{totalL}}
   </h3>
   <div class="col-md-8">
@@ -73,5 +90,28 @@
   </div>
   
 </div>
+<div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title" id="myModalLabel">REGISTRAR NUEVO CLIENTE</h4>
+        </div>
+        <div class="modal-body ">
+          Nombres del cliente:
+          <input type="text" class="form-control" #n>
+          Apellidos del cliente:
+          <input type="text" class="form-control" #a>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="n.value='';a.value='';">Cancelar</button>
+            <button type="button" class="btn btn-success" (click)="guardarCliente(n.value,a.value);n.value='';a.value='';" data-dismiss="modal">Guardar cliente</button>
+          </div>
+      </div>
+    </div>
+  </div>
+  
 
 <router-outlet></router-outlet>
