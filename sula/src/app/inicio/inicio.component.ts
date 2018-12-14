@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
 import {DataService} from '../servicios/data.service';
+import {TitleService} from '../servicios/title.service';
 import { from } from 'rxjs';
 import { Factura,Cliente,TotalLeche } from "../models";
-
-
 
 @Component({
   selector: 'app-inicio',
@@ -13,7 +11,11 @@ import { Factura,Cliente,TotalLeche } from "../models";
 })
 export class InicioComponent implements OnInit {
 
-  constructor(private ds: DataService) { }
+  constructor(
+    private ds: DataService,
+    private ts: TitleService
+
+    ) { }
 
   facturas: Factura[];
   clientes: Cliente[];
@@ -26,6 +28,7 @@ export class InicioComponent implements OnInit {
     this.obtenerFacturas();
     this.obtenerClientes();
     this.obtenerTotalLeche();
+    this.ts.setTitle('Factura');
     
     
   }
@@ -52,7 +55,7 @@ export class InicioComponent implements OnInit {
     if (!cliente || !cantidad || !precio) return;
     this.factura = new Factura(0,cliente,cantidad,precio);
     this.ds.guardarFactura(this.factura).subscribe(i => {
-      this.facturas.push(i)
+    this.facturas.push(i)
 
       this.totalLeche.id = 2;
       this.totalLeche.totalLeche = +this.totalL+(+i.cantidad);

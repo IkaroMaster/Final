@@ -8,12 +8,20 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { DetalleClienteComponent } from './detalle-cliente/detalle-cliente.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { AboutComponent } from './about/about.component';
+import { NotaEntregaComponent } from './nota-entrega/nota-entrega.component';
+import { DetalleEntregaComponent } from './detalle-entrega/detalle-entrega.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
-    DetalleClienteComponent
+    DetalleClienteComponent,
+    NotfoundComponent,
+    AboutComponent,
+    NotaEntregaComponent,
+    DetalleEntregaComponent
   ],
   imports: [
     BrowserModule,

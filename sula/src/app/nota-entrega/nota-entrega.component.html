@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-4">
+    <h2>Nueva Orden de Entrega</h2>
+    <hr>
+      Productor: <br>
+      <select class="form-control" #cl>
+        <option value="">Seleccione</option>
+        <option *ngFor="let c of productores" value="{{ c.id }}">
+          {{ c.nombre }} {{c.apellido}}
+        </option>
+      </select>
+      <br>
+      Cantidad:
+      <input type="number" class="form-control" #c >
+      <br>
+      Precio:
+      <input type="number" class="form-control" #p >
+      <br><br>
+      <button class="btn btn-success form-control" (click)="guardarNotaEntrega(cl.value,c.value,p.value)">Generar</button>
+      
+        
+    
+  </div>
+  Total Leche:
+  <h3 *ngIf="totalL">
+    {{totalL}}
+  </h3>
+  <div class="col-md-8">
+    <h2>Listado de Ordenes de Entrega</h2>
+    <hr>
+    
+    
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nombre del Productores</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Total</th>
+          <th width='15%'>Anular</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let f of NotaEntregas">
+          <td>{{f.id}}</td>
+          <td><a routerLink="/detalle-entrega/{{f.productorInfo.id}}/">{{f.productorInfo.nombre}} {{f.productorInfo.apellido}}</a> </td>
+          <td>{{f.cantidad}} </td>
+          <td>{{f.precio}} </td>
+          <td>{{f.total}} </td> 
+          <td>
+           <span title="Eliminar" class="badge remove" (click)="eliminarNotaEntrega(f)">X</span> 
+          </td>
+        </tr>
+      </tbody>
+    </table> 
+  </div>
+  
+</div>

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Cliente, Factura,TotalLeche } from '../models';
+import { Cliente, Factura,TotalLeche,NotaEntrega,Productor } from '../models';
 
 
 const httpOptions = {
@@ -42,6 +41,22 @@ export class DataService {
   {
     return this.http.delete(`${this.url}/factura/${f.id}/eliminar/`, httpOptions)
   }
+    // -----------------Nota Entrega
+
+  obtenerNotaEntrega():Observable<NotaEntrega[]>
+  {
+    return this.http.get<NotaEntrega[]>(`${this.url}/notaEntregas/`);
+  } 
+
+  public guardarNotaEntrega(f: NotaEntrega):Observable<NotaEntrega>
+  {
+    return this.http.post<NotaEntrega>(`${this.url}/notaEntregas/`,f,httpOptions);
+  }
+  
+  eliminarNotaEntrega(f: NotaEntrega)
+  {
+    return this.http.delete(`${this.url}/notaEntrega/${f.id}/eliminar/`, httpOptions)
+  }
 
   //------------------Clientes
 
@@ -64,6 +79,28 @@ export class DataService {
   {
     return this.http.get<Factura[]>(`${this.url}/cliente/${id}/facturas/`);
   }
+  //------------------Productor
+
+  obtenerProductor():Observable<Productor[]>
+  {
+    return this.http.get<Productor[]>(`${this.url}/productores/`);
+  }
+
+  verDetalleProductor(id: Number):Observable<Productor>
+  {
+    return this.http.get<Productor>(`${this.url}/productor/${id}`);
+  }
+
+  actualizarProductor(cli: Productor): Observable<Productor>
+  {
+    return this.http.put<Productor>(`${this.url}/productor/${cli.id}/`, cli, httpOptions);
+  }
+
+  obtenerProductorNotaEntrega(id: number): Observable<NotaEntrega[]>
+  {
+    return this.http.get<NotaEntrega[]>(`${this.url}/productor/${id}/notaentrega/`);
+  }
+
 
   
 }

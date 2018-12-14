@@ -39,9 +39,11 @@ class ClienteRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
 class ProductorListAPIView(ListCreateAPIView):
     queryset = Productor.objects.all()
     serializer_class = ProductorSerializer
-
-
+class ProductorRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    queryset = Productor.objects.all()
+    serializer_class = ProductorSerializer
 #----------------Factura
+
 class FacturaListAPIView(ListCreateAPIView):
     queryset = Factura.objects.all()
     serializer_class = FacturaSerializer
@@ -57,8 +59,22 @@ class ClienteFacturasListAPIView(ListAPIView):
     cliente = Cliente.objects.get(pk = self.kwargs['id'])
     return Factura.objects.filter(cliente = cliente)
 
+#----------------------Nota Entrega----------------------------
+class NotaEntregaListAPIView(ListCreateAPIView):
+    queryset = NotaEntrega.objects.all()
+    serializer_class = NotaEntregaSerializer
 
+class NotaEntregaDeleteAPIView(DestroyAPIView):
+    queryset = NotaEntrega.objects.all()
+    serializer_class = NotaEntregaSerializer
 
+class ProductorNotaEntregaListAPIView(ListAPIView):
+  serializer_class = NotaEntregaSerializer
+
+  def get_queryset(self):
+    productor = Productor.objects.get(pk = self.kwargs['id'])
+    return NotaEntrega.objects.filter(productor = productor)
+#------------------------------------------------------------------
 # class ClientAddAPIView(CreateAPIView):
 #   queryset = Client.objects.all()
 #   serializer_class = ClientAddSerializer

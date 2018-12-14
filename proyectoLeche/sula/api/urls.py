@@ -6,20 +6,13 @@ from .views import (
   FacturaDeleteAPIView,
   TotalLecheRetrieveUpdateAPIView,
   ClienteRetrieveUpdateDestroyAPIView,
-  ClienteFacturasListAPIView
+  ClienteFacturasListAPIView,
+  NotaEntregaListAPIView,
+  NotaEntregaDeleteAPIView,
+  ProductorNotaEntregaListAPIView,
+  ProductorRetrieveUpdateDestroyAPIView,
 )
-# from .views import (
-#   ClientListAPIView,
-#   ClientAddAPIView,
-#   ClientDeleteAPIView,
-#   ClientUpdateAPIView,
-#   ClientDetailAPIView,
-#   AccountCreateAPIView,
-#   AccountTypeListAPIView,
-#   AccountListAPIView,
-#   ClientAccountsListAPIView,
-#   ClientList,
-# )
+
 
 urlpatterns = [
 
@@ -27,14 +20,18 @@ urlpatterns = [
   #-------------- Cliente
   url(r'^clientes/$', ClienteListAPIView.as_view(), name='lista-clientes'),
   url(r'^cliente/(?P<pk>\d+)/$', ClienteRetrieveUpdateDestroyAPIView.as_view(), name='cliente-detalle'),
-  url(r'^cliente/(?P<id>\d+)/facturas/$', ClienteFacturasListAPIView.as_view(), name='client-accounts'),
+  url(r'^cliente/(?P<id>\d+)/facturas/$', ClienteFacturasListAPIView.as_view(), name='client-factura'),
 
   #-------------- Productor
   url(r'^productores/$', ProductorListAPIView.as_view(), name='lista-productores'),
-
+  url(r'^productor/(?P<pk>\d+)/$', ProductorRetrieveUpdateDestroyAPIView.as_view(), name='productor-detalle'),
   #-------------- Factura
   url(r'^facturas/$', FacturaListAPIView.as_view(), name='lista-facturas'),
   url(r'^factura/(?P<pk>\d+)/eliminar/$', FacturaDeleteAPIView.as_view(), name='eliminar-factura'),
+  #-------------- Nota Entrega
+  url(r'^notaEntregas/$', NotaEntregaListAPIView.as_view(), name='lista-notaEntrega'),
+  url(r'^notaEntrega/(?P<pk>\d+)/eliminar/$', NotaEntregaDeleteAPIView.as_view(), name='eliminar-notaentrega'),
+  url(r'^productor/(?P<id>\d+)/notaentrega/$', ProductorNotaEntregaListAPIView.as_view(), name='producto-notaentrga'),
   
   # url(r'^client/add/$', ClientAddAPIView.as_view(), name='add-client'),
   # url(r'^client/(?P<pk>\d+)/remove/$', ClientDeleteAPIView.as_view(), name='del-client'),

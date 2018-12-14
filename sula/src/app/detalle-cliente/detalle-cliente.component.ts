@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import {TitleService} from '../servicios/title.service';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../servicios/data.service';
 import { Cliente, Factura } from '../models';
@@ -14,7 +14,8 @@ export class DetalleClienteComponent implements OnInit {
   constructor(
     private ds:DataService,
     private ar:ActivatedRoute,
-    private l:Location
+    private l:Location,
+    private ts: TitleService
     ) { }
 
     cliente:Cliente;
@@ -24,6 +25,7 @@ export class DetalleClienteComponent implements OnInit {
   ngOnInit() {
     this.detalleCliente();
     this.obtenerClienteFacturas();
+    this.ts.setTitle('Editar Cliente');
     //this.obtenerClientes();
   }
 
