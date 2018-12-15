@@ -1,33 +1,48 @@
+
+<div class="container">
+
+
 <div class="row" *ngIf="productor">
   
-  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <h1>{{productor.nombre}} {{productor.apellido}}</h1>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 well">
+    <h4 class="text-center">Detalles del productor {{productor.nombre}} {{productor.apellido}}</h4>
   </div>
+  
+  <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
     
+  </div>
+   
   <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-    <br>
-      ID: <br>
+      <h2 class="text-center">Editar productor </h2>
+      <hr>
+      <h4><strong>ID:</strong></h4>
       <input class="form-control" type="number" [(ngModel)]="productor.id" readonly>
-  
-      <br>
-  
-      Nombre: <br>
+      <h4><strong>Nombre:</strong></h4>
       <input class="form-control" type="text" [(ngModel)]="productor.nombre">
-  
-      <br>
-  
-      Apellido: <br>
+      <h4><strong>Apellido:</strong></h4>
       <input class="form-control" type="text" [(ngModel)]="productor.apellido">
   
       <br>
-      <button class="btn btn-info " (click)="actualizarProductor();" >actualizar</button>|
-      <button class="btn btn-danger " (click)="volver()" >Cancelar</button>
+      
+      
+      <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        
+      </div>
+      
+      <div class="col-md-4">
+          <button class="btn btn-info form-control" (click)="actualizarProductor();" >Actualizar</button>
+      </div>
+      
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+          <button class="btn btn-danger form-control " (click)="volver()" >Cancelar</button>
+      </div>
+      
       
   </div>
   
   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
     
-      <h2>Listado de Notas de Entrega de {{productor.nombre}} </h2>
+      <h2 class="text-center">Historial de notas de entrega de {{productor.nombre}} </h2>
       <hr>
       
       
@@ -56,5 +71,7 @@
     
   </div>
   
+  
+</div>
   
 </div>

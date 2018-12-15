@@ -1,19 +1,33 @@
+
+<div class="container">
+  
 <div class="row">
   <div class="col-md-4">
     <h2>Nueva Orden de Entrega</h2>
     <hr>
-      Productor: <br>
-      <select class="form-control" #cl>
-        <option value="">Seleccione</option>
-        <option *ngFor="let c of productores" value="{{ c.id }}">
-          {{ c.nombre }} {{c.apellido}}
-        </option>
-      </select>
-      <br>
-      Cantidad:
+      <h4><strong>Productor: </strong></h4>
+      <div class="row">
+        
+        <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+            <select class="form-control" #cl>
+                <option value="">Seleccione el productor</option>
+                <option *ngFor="let c of productores" value="{{ c.id }}">
+                  {{ c.nombre }} {{c.apellido}}
+                </option>
+              </select>
+        </div>
+        
+          <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" style="padding:0px">
+              <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#miModal">
+                  <strong>+</strong>
+                </button>
+  
+          </div>
+      </div>
+      <h4><strong>Cantidad:</strong></h4>
       <input type="number" class="form-control" #c >
-      <br>
-      Precio:
+      <h4><strong>
+        Precio:</strong></h4>
       <input type="number" class="form-control" #p >
       <br><br>
       <button class="btn btn-success form-control" (click)="guardarNotaEntrega(cl.value,c.value,p.value)">Generar</button>
@@ -21,12 +35,9 @@
         
     
   </div>
-  Total litros de Leche en Existencia:
-  <h3>
-    {{totalL}}
-  </h3>
+  
   <div class="col-md-8">
-    <h2>Listado de Ordenes de Entrega</h2>
+    <h2 class="text-center">Listado de Ordenes de Entrega</h2>
     <hr>
     
     
@@ -55,5 +66,37 @@
       </tbody>
     </table> 
   </div>
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <br><hr>  
+      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">       
+      </div>     
+      <div class="col-md-4 well">        
+          <h4 class="text-center"><p>Litros de leche en existencia: <strong>{{totalL}}</strong></p></h4>         
+      </div>  
+  </div>
   
+</div>
+
+<div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h4 class="modal-title text-center" id="myModalLabel">REGISTRAR NUEVO PRODUCTOR</h4>
+        </div>
+        <div class="modal-body ">
+          <h4><strong> Nombre:</strong></h4>
+          <input type="text" class="form-control" #n>
+          <h4><strong> Apellido:</strong></h4>
+          <input type="text" class="form-control" #a>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="n.value='';a.value='';">Cancelar</button>
+            <button type="button" class="btn btn-success" (click)="guardarProductor(n.value,a.value);n.value='';a.value='';" data-dismiss="modal">Guardar productor</button>
+          </div>
+      </div>
+    </div>
+  </div>
 </div>

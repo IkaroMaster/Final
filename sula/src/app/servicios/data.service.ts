@@ -106,6 +106,11 @@ export class DataService {
     return this.http.get<NotaEntrega[]>(`${this.url}/productor/${id}/notaentrega/`);
   }
 
+  guardarProductor(p: Productor): Observable<Productor>
+  {
+    return this.http.post<Productor>(`${this.url}/productores/`, p, httpOptions);
+  }
+
 
   
 }

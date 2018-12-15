@@ -16,6 +16,7 @@ export class NotaEntregaComponent implements OnInit {
   	) { }
   NotaEntregas: NotaEntrega[];
   productores: Productor[];
+  productor: Productor;
   NotaEntrega: NotaEntrega;
   totalLeche: TotalLeche; 
   totalL:number = 0;
@@ -88,10 +89,28 @@ export class NotaEntregaComponent implements OnInit {
     this.totalL = this.totalLeche.totalLeche;
 
   }
-  // -----------------------Clientes
+  // -----------------------Productor
   obtenerProductor()
   {
     this.ds.obtenerProductor().subscribe(i =>this.productores = i);
+  }
+
+  guardarProductor(nombre: string, apellido: string)
+  {
+    nombre = nombre.trim();
+    apellido = apellido.trim();
+    
+
+    if (!nombre || !apellido) return;
+
+    
+    this.productor = new Productor(0, nombre, apellido);
+
+    this.ds.guardarCliente(this.productor).subscribe(c => {
+      this.productores.push(c)
+      console.log(this.productores);
+    });
+    
   }
 
 }
