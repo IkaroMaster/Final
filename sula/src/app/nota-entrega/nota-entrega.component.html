@@ -30,7 +30,7 @@
         Precio:</strong></h4>
       <input type="number" class="form-control" #p >
       <br><br>
-      <button class="btn btn-success form-control" (click)="guardarNotaEntrega(cl.value,c.value,p.value)">Generar</button>
+      <button class="btn btn-success form-control" (click)="guardarNotaEntrega(cl.value,c.value,p.value);cl.value='';c.value='';p.value='';">Generar</button>
       
         
     
@@ -65,6 +65,7 @@
         </tr>
       </tbody>
     </table> 
+    <h4 class="text-center  well" *ngIf="!NotaEntregas || NotaEntregas.length == 0" style="color:chocolate"><strong>No hay notas de entrega registradas</strong></h4>
   </div>
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <br><hr>  

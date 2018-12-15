@@ -12,6 +12,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { AboutComponent } from './about/about.component';
 import { NotaEntregaComponent } from './nota-entrega/nota-entrega.component';
 import { DetalleEntregaComponent } from './detalle-entrega/detalle-entrega.component';
+import { ClienteComponent } from './cliente/cliente.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { DetalleEntregaComponent } from './detalle-entrega/detalle-entrega.compo
     NotfoundComponent,
     AboutComponent,
     NotaEntregaComponent,
-    DetalleEntregaComponent
+    DetalleEntregaComponent,
+    ClienteComponent
   ],
   imports: [
     BrowserModule,

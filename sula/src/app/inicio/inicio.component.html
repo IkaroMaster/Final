@@ -36,7 +36,7 @@
       <h4><strong>Precio:</strong></h4>
       <input type="number" class="form-control" #p >
       <br><br>
-      <button class="btn btn-success form-control" (click)="guardarFactura(cl.value,c.value,p.value)">Facturar</button>
+      <button class="btn btn-success form-control" (click)="guardarFactura(cl.value,c.value,p.value);cl.value='';c.value='';p.value='';">Facturar</button>
       
     </div>   
     
@@ -57,7 +57,9 @@
           <th width='15%'>Anular</th>
         </tr>
       </thead>
+      
       <tbody>
+          
         <tr *ngFor="let f of facturas">
           
           <td>{{f.id}}</td>
@@ -73,7 +75,9 @@
           </td>
         </tr>
       </tbody>
+      
     </table>
+    <h4 class="text-center  well" *ngIf="!facturas || facturas.length == 0" style="color:chocolate"><strong>No hay facturas</strong></h4>
     
     
   </div>
