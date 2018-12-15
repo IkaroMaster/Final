@@ -7,6 +7,7 @@ import { AboutComponent } from './about/about.component';
 import { NotaEntregaComponent } from './nota-entrega/nota-entrega.component';
 import {DetalleEntregaComponent} from './detalle-entrega/detalle-entrega.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { ProductorComponent } from './productor/productor.component';
 
 const routes: Routes = [
   {path: '', component: InicioComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'detalle-entrega/:id', component: DetalleEntregaComponent},
   {path: 'notaEntrega', component: NotaEntregaComponent},
   {path: 'cliente', component: ClienteComponent},
+    {path: 'productor', component: ProductorComponent},
   {path: '**', component: NotfoundComponent},
 ];
 

@@ -13,6 +13,7 @@ import { AboutComponent } from './about/about.component';
 import { NotaEntregaComponent } from './nota-entrega/nota-entrega.component';
 import { DetalleEntregaComponent } from './detalle-entrega/detalle-entrega.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { ProductorComponent } from './productor/productor.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ClienteComponent } from './cliente/cliente.component';
     AboutComponent,
     NotaEntregaComponent,
     DetalleEntregaComponent,
-    ClienteComponent
+    ClienteComponent,
+    ProductorComponent
   ],
   imports: [
     BrowserModule,
